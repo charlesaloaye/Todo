@@ -18,6 +18,5 @@ class UserRequest(BaseModel):
 
 class UserResponse(BaseModel):
     id: int
-    role: str
     email: EmailStr
     status: bool

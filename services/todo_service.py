@@ -5,6 +5,13 @@ from models.todo import Todos
 from schemas.todo import TodoRequest
 
 
+def read_todos_by_admin(db: Session, user: Session):
+
+    if user.role != "admin":
+        raise _not_found()
+    return db.query(Todos).filter(Todos.is_public == True).all()
+
+
 def read_todos(db: Session):
     return db.query(Todos).filter(Todos.is_public == True).all()
 

@@ -11,7 +11,7 @@ from db.database_service import db_dependency
 from errors.messages import _already_exists, _invalid_credentials
 from models.user import Users
 from schemas.user import UserRequest
-from security.password import verify
+from security.password import hash_password, verify
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
@@ -89,6 +89,23 @@ def login(db: Session, username: str, password: str):
     token = create_user_token(user)
 
     return {"access_token": token, "token_type": "bearer"}
+
+
+def read_all_users(db: Session, user: Users):
+    if user.role != "admin":
+        raise _invalid_credentials()
+    return db.query(Users).all()
+
+
+def read_a_user(db: Session, user_id: int, user: Users):
+    if user.role != "admin":
+        raise _invalid_credentials()
+    existing_user = db.query(Users).filter(Users.id == user_id).first()
+
+    if existing_user is None:
+        raise _invalid_credentials()
+
+    return existing_user
 
 
 CurrentUser = Annotated[Users, Depends(get_current_user)]
