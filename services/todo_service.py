@@ -56,7 +56,9 @@ def create_todo(db: Session, todo_request: TodoRequest, user: Session):
 def update_todo(db: Session, todo_request: TodoRequest, todo_id: int, user: Session):
 
     existing_todo = (
-        db.query(Todos).filter((Todos.id == todo_id), (Todos.id == user.id)).first()
+        db.query(Todos)
+        .filter((Todos.id == todo_id), (Todos.owner_id == user.id))
+        .first()
     )
 
     if existing_todo is None:
