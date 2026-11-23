@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from errors.messages import _already_exists, _not_found
+from errors.messages import _already_exists, _not_found, _unauthorized
 from models.todo import Todos
 from schemas.todo import TodoRequest
 
@@ -62,6 +62,9 @@ def update_todo(db: Session, todo_request: TodoRequest, todo_id: int, user: Sess
     if existing_todo is None:
         raise _not_found()
 
+    if existing_todo.owner_id != user.id:
+        raise _unauthorized()
+
     existing_todo.title = todo_request.title
     existing_todo.description = todo_request.description
     existing_todo.priority = todo_request.priority
@@ -85,6 +88,9 @@ def delete_todo(db: Session, todo_id: int, user: Session):
 
     if existing_todo is None:
         raise _not_found()
+
+    if existing_todo.owner_id != user.id:
+        raise _unauthorized()
 
     db.delete(existing_todo)
     db.commit()

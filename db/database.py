@@ -1,15 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-DB_CONNECTION_URI = "sqlite:///./todosapp.db"
+DB_CONNECTION_URI = "postgresql://postgres:password@localhost/TodoApplicationDatabase"
 
 
-engine = create_engine(
-    DB_CONNECTION_URI,
-    connect_args={
-        "check_same_thread": False,
-    },
-)
+engine = create_engine(DB_CONNECTION_URI)
 
 
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
