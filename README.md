@@ -22,11 +22,12 @@ The project provides user registration and login, protected Todo operations, pub
 - Python
 - FastAPI
 - SQLAlchemy
-- SQLite
+- Postgres
 - Pydantic
 - PyJWT
 - Passlib
 - bcrypt
+- Alembic
 
 ## Project Structure
 
