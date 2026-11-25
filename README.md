@@ -1,6 +1,6 @@
 # Todo API
 
-A RESTful Todo API built with FastAPI, SQLAlchemy, SQLite, Pydantic, and JWT authentication.
+A RESTful Todo API built with FastAPI, SQLAlchemy, PostgreSql, Pydantic, and JWT authentication.
 
 The project provides user registration and login, protected Todo operations, public Todo retrieval, priority and completion tracking, and automatic interactive API documentation.
 
@@ -12,7 +12,7 @@ The project provides user registration and login, protected Todo operations, pub
 - Create, read, update, and delete Todo operations
 - Todo priority and completion status
 - Public/private Todo visibility
-- SQLAlchemy and SQLite persistence
+- SQLAlchemy and PostgreSql persistence
 - Pydantic request and response validation
 - Automatic Swagger UI and OpenAPI documentation
 - Layered project structure with routers, services, schemas, and models
@@ -188,7 +188,7 @@ As a senior developer learning to adopt another framework, this project helped m
 - Use dependency injection for database sessions and authenticated users
 - Combine Python type hints with Pydantic validation
 - Implement JWT authentication and OAuth2 password flows
-- Integrate SQLAlchemy with an SQLite database
+- Integrate SQLAlchemy with an PostgreSql database
 - Separate API routes, business logic, schemas, and data models
 - Generate interactive API documentation from code
 - Design REST endpoints and consistent HTTP responses
