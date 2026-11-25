@@ -7,7 +7,7 @@ from schemas.todo import TodoRequest
 
 def read_todos_by_admin(db: Session, user: Session):
 
-    if user.role != "admin":
+    if user.role is not "admin":
         raise _not_found()
     return db.query(Todos).filter(Todos.is_public == True).all()
 
@@ -64,7 +64,7 @@ def update_todo(db: Session, todo_request: TodoRequest, todo_id: int, user: Sess
     if existing_todo is None:
         raise _not_found()
 
-    if existing_todo.owner_id != user.id:
+    if existing_todo.owner_id is not user.id:
         raise _unauthorized()
 
     existing_todo.title = todo_request.title
@@ -91,7 +91,7 @@ def delete_todo(db: Session, todo_id: int, user: Session):
     if existing_todo is None:
         raise _not_found()
 
-    if existing_todo.owner_id != user.id:
+    if existing_todo.owner_id is not user.id:
         raise _unauthorized()
 
     db.delete(existing_todo)
