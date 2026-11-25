@@ -92,13 +92,13 @@ def login(db: Session, username: str, password: str):
 
 
 def read_all_users(db: Session, user: Users):
-    if user.role != "admin":
+    if user.role is not "admin":
         raise _invalid_credentials()
     return db.query(Users).all()
 
 
 def read_a_user(db: Session, user_id: int, user: Users):
-    if user.role != "admin":
+    if user.role is not "admin":
         raise _invalid_credentials()
     existing_user = db.query(Users).filter(Users.id == user_id).first()
 
