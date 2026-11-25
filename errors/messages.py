@@ -14,7 +14,7 @@ def _unauthorized():
 def _invalid_credentials():
     return HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Unauthorized Request",
+        detail="Invalid credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
 
